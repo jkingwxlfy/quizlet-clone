@@ -1,6 +1,12 @@
 @import "../../styles/mixins"
     
 .card-page
+    &__container
+        display: flex
+        align-items: center
+        justify-content: space-around
+        padding: 20px
+        margin-top: 30px
     &__title
         font-size: 32px
         color: #149eca
@@ -16,4 +22,3 @@
         &__button
             padding: 10px
             @include white-button
-            

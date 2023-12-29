@@ -9,6 +9,7 @@ import WordList from "../../components/word-list/WordList";
 import WordListForm from "../../components/word-list-form/WordListForm";
 import CardFormEdit from "../../components/card-form-edit/CardFormEdit";
 import CardFormDelete from "../../components/card-form-delete/CardFormDelete";
+import SearchBar from "../../components/search-bar/SearchBar";
 import { Spinner, MyModal, Error } from "../../components/UI";
 
 import "./card-page.sass";
@@ -82,7 +83,10 @@ const CardPage: React.FC = () => {
                         />
                     </MyModal>
                 </div>
-                <ModeList />
+                <div className="card-page__container">
+                    <ModeList />
+                    <SearchBar />
+                </div>
                 <WordListForm />
                 <WordList />
             </div>

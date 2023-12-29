@@ -1,10 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import type { IBoard, ICard } from "../../models/IBoard";
-
-const initialState = {
-    board: {} as IBoard,
-    card: {} as ICard,
-};
+import type { PayloadAction } from "@reduxjs/toolkit";
+import type { IBoard, ICard, IWord } from "../../models/IBoard";
 
 interface PayloadActionBoards<Boards, ID> {
     payload: {
@@ -17,6 +13,12 @@ interface ID {
     boardId: string;
     cardId: string;
 }
+
+const initialState = {
+    board: {} as IBoard,
+    card: {} as ICard,
+    filteredWords: [] as IWord[],
+};
 
 const cardSlice = createSlice({
     name: "card",
@@ -33,9 +35,23 @@ const cardSlice = createSlice({
                 return cardItem.id === action.payload.id.cardId;
             })[0];
         },
+        filterWords: (state, action: PayloadAction<string>) => {
+            state.filteredWords =
+                state.card.words &&
+                state.card.words.filter((word) => {
+                    return (
+                        word.value
+                            .toLowerCase()
+                            .includes(action.payload.toLowerCase()) ||
+                        word.word
+                            .toLowerCase()
+                            .includes(action.payload.toLowerCase())
+                    );
+                });
+        },
     },
 });
 
 const { actions, reducer } = cardSlice;
-export const { setCardSliceData } = actions;
+export const { setCardSliceData, filterWords } = actions;
 export default reducer;
