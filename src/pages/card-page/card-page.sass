@@ -1,0 +1,19 @@
+@import "../../styles/mixins"
+    
+.card-page
+    &__title
+        font-size: 32px
+        color: #149eca
+        letter-spacing: 1.2px
+    &__header
+        display: flex
+        justify-content: space-around
+        align-items: center
+        width: 100%
+        height: fit-content
+        &__link
+            @include link-button
+        &__button
+            padding: 10px
+            @include white-button
+            

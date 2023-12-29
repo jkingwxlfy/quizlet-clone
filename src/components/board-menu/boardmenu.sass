@@ -1,0 +1,20 @@
+@import "../../styles/mixins"
+    
+.board__container
+    display: grid
+    grid-template-columns: 25% 1fr
+    
+.board-menu
+    background-color: #1c1e21
+    height: 100vh
+    padding: 15px
+    &__container
+        display: flex
+        flex-direction: column
+        align-items: center
+    &__title
+        font-size: 26px
+        padding-top: 20px
+    &__button
+        margin: 35px 0
+        @include blue-button

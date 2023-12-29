@@ -1,0 +1,70 @@
+@mixin blue-button
+    padding: 10px
+    user-select: none
+    border: 1px solid black
+    border-radius: 12px
+    outline: none
+    font-size: 20px
+    font-weight: 600
+    color: #fff
+    cursor: pointer
+    background: #149eca
+    transition: 0.1s all
+    &:hover
+        background: #0f799c
+    &:active
+        transform: translate(0em, 0.5em)
+    &.disabled
+        background: #0a4e64
+        color: #a0a0a0
+        &:active
+            transform: translate(0em, 0em)
+
+@mixin white-button
+    padding: 10px
+    border: 0
+    outline: 0
+    border-radius: 9999px
+    font-size: 20px
+    background-color: transparent
+    color: #fff
+    cursor: pointer
+    user-select: none
+    text-decoration: none
+    transition: 0.1s all
+    &:hover
+        background-color: #363c48 
+    &:active
+        transform: translate(0em, 0.5em)
+    &.active
+        color: #149eca
+
+@mixin link-button
+    padding: 10px
+    font-size: 20px
+    background-color: transparent
+    color: #fff
+    outline: 0
+    border: 0
+    cursor: pointer
+    user-select: none
+    text-decoration: none
+    transition: 0.1s all
+    &:hover
+        color: #149eca
+    &:active
+        transform: translate(0em, 0.5em)
+    &.active
+        color: #149eca
+
+@mixin input
+    display: block
+    width: 100%
+    border: 1px solid black
+    border-radius: 12px
+    margin: 20px 0
+    padding: 5px
+    font-size: 20px
+    outline: none
+    &:focus
+        border: 1px solid #398fac

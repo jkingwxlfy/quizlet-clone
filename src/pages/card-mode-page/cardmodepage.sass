@@ -1,0 +1,53 @@
+@import "../../styles/mixins"
+
+.card-mode-page
+    &__header
+        display: flex
+        align-items: center
+        width: 100%
+        font-size: 30px
+    &__title
+        text-align: center
+        margin: 0 auto
+    &__link
+        @include white-button
+        font-size: 36px
+        width: fit-content
+        padding: 25px
+        position: absolute
+        top: 10px
+        left: 30px
+    &__card
+        display: flex
+        justify-content: center
+        align-items: center
+        background-color: #191c21
+        height: 600px
+        border-radius: 12px
+        font-size: 36px
+        cursor: pointer
+        user-select: none
+        padding: 0 150px
+    &__buttons
+        height: 100px
+        display: flex
+        justify-content: space-around
+        align-items: center
+        padding: 0 250px
+        background-color: #191c21
+        border-radius: 12px
+    &__container
+        margin-top: 30px
+        border: 1px solid #2f94ac
+        border-radius: 12px
+    &__button
+        @include blue-button
+        font-size: 28px
+        width: 200px
+        height: fit-content
+        display: flex
+        justify-content: center
+        align-items: center
+    &__word
+        width: 100%
+        text-align: center

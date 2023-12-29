@@ -1,0 +1,72 @@
+@import "../../styles/mixins"
+    
+.test-mode-page
+    &__container
+        display: flex
+        flex-direction: column
+        justify-content: center
+        align-items: center
+        margin: 130px 0
+    &__header
+        position: fixed
+        top: 0
+        left: 0
+        width: 100%
+        padding: 20px
+        font-size: 30px
+        background-color: #191c21
+        z-index: 9999
+    &__results
+        width: 60%
+        border-radius: 12px
+        border: 3px solid #2f94ac
+        padding: 25px
+        font-size: 24px
+        text-align: center
+        line-height: 50px
+        display: none
+        &.showed
+            display: block
+    &__wrong
+        margin-bottom: 15px
+    &__retry
+        @include blue-button
+        display: block
+        margin: 0 auto
+        font-size: 24px
+    &__answer
+        font-size: 24px
+        display: none
+        padding: 5px 0
+        color: #5edc89
+        &.incorrect
+            display: block
+    &__item
+        width: 60%
+        position: relative
+        padding: 15px
+        margin-top: 40px
+        border: 3px solid #2f94ac
+        border-radius: 12px
+        &.correct
+            border: 3px solid green
+        &.incorrect
+            border: 3px solid red
+    &__count
+        position: absolute
+        top: 15px
+        right: 15px
+    &__value
+        font-size: 24px
+        width: 90%
+        height: fit-content
+    &__input
+        @include input
+        font-size: 24px
+        &:focus
+            border: 3px solid #ac632f
+    &__submit
+        @include blue-button
+        display: block
+        margin: 0 auto
+        

@@ -1,0 +1,17 @@
+@import "../../styles/mixins"
+    
+.board-page
+    display: grid
+    grid-template-columns: 1fr
+    grid-template-rows: 100px 1fr 
+    &__header
+        display: flex
+        justify-content: space-around
+        align-items: center
+        padding: 25px 200px
+        &__title
+            font-size: 32px
+            letter-spacing: 1.2px
+            color: #149eca
+        &__button
+            @include white-button

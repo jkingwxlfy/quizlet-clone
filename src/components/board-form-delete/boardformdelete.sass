@@ -1,0 +1,25 @@
+.board-form-delete
+    &__buttons
+        display: flex
+        justify-content: space-around
+        padding: 0 20px
+        margin: 20px 0
+    &__button
+        font-size: 20px
+        padding: 10px
+        cursor: pointer
+        background: #149eca
+        color: #fff
+        transition: 0.1s all
+        outline: none
+        border-radius: 12px
+        border: 0
+        &:hover
+            background: #0f799c
+        &:active
+            transform: translate(0em, 0.5em)
+        &.disabled
+            background: #0a4e64
+            color: #a0a0a0
+            &:active
+                transform: translate(0em, 0em)

@@ -1,0 +1,67 @@
+{
+    "boards": [
+        {
+            "id": "db2dd199-7d37-4d40-b8b6-fc59c47a4f55",
+            "title": "Example Board",
+            "cards": [
+                {
+                    "id": "d47e3b45-b563-4b91-a1d8-9d00e2104448",
+                    "title": "Some Card",
+                    "completed": false,
+                    "words": [
+                        {
+                            "word": "betray",
+                            "value": "предавать",
+                            "id": "a436c6dc-0bf5-44df-91f2-8b4cb9bb03e1"
+                        },
+                        {
+                            "word": "threaten",
+                            "value": "угрожать",
+                            "id": "32e7aebc-10fa-4469-ab34-9bde6baf1c30"
+                        },
+                        {
+                            "word": "firmly",
+                            "value": "твердо",
+                            "id": "d092bc8b-7cce-41dd-a6c6-e740b7237f02"
+                        },
+                        {
+                            "word": "thrilling",
+                            "value": "захватывающий",
+                            "id": "84490749-e11b-49d9-9306-863cbcb617de"
+                        },
+                        {
+                            "word": "enrich",
+                            "value": "обоготить",
+                            "id": "a703ae35-6be3-44dc-b8a1-d39042c610b9"
+                        },
+                        {
+                            "word": "excited",
+                            "value": "взлолнован, воодущевлен",
+                            "id": "094df353-509e-4e13-a1dc-d373de00b0a2"
+                        },
+                        {
+                            "word": "unimaginable",
+                            "value": "невообразимый",
+                            "id": "22a55c3c-0d3a-4db8-a187-86f26c63e3d2"
+                        },
+                        {
+                            "word": "reliable",
+                            "value": "надежный",
+                            "id": "85f24404-0873-4840-86c7-474f750cad5b"
+                        },
+                        {
+                            "word": "take in",
+                            "value": "обманывать, вводить в заблуждение",
+                            "id": "6ffe19ab-6726-4bb2-b1b6-193537f87a92"
+                        },
+                        {
+                            "word": "breathtaking",
+                            "value": "потрясяющий",
+                            "id": "9fbdd55b-78e2-487c-bdce-4d01611b0853"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

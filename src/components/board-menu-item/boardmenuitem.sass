@@ -1,0 +1,18 @@
+@import "../../styles/mixins"
+    
+.board-menu-item
+    display: flex
+    align-items: center
+    justify-content: space-between
+    width: 100%
+    margin-top: 5px
+    padding: 0 10px
+    &__name
+        padding: 10px
+        margin: 15px 0 
+        border-radius: 15px
+        font-size: 20px
+        text-overflow: ellipsis
+        overflow: hidden
+    &__button
+        @include link-button 

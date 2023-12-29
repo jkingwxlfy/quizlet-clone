@@ -1,0 +1,19 @@
+@import "../../styles/mixins"
+    
+.card-list-item
+    border: 1px solid #006880
+    border-radius: 12px
+    width: 230px
+    height: fit-content
+    padding: 25px
+    margin: 0 20px
+    &__title
+        font-size: 22px
+        text-align: center
+        height: 30px
+        margin-bottom: 10px
+    &__button
+        @include link-button
+        display: block
+        margin: 0 auto
+        text-align: center
