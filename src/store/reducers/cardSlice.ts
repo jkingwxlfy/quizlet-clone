@@ -35,7 +35,15 @@ const cardSlice = createSlice({
                 return cardItem.id === action.payload.id.cardId;
             })[0];
         },
+        editCardData: (state, action: PayloadAction<ICard>) => {
+            state.card = { ...action.payload };
+        },
         filterWords: (state, action: PayloadAction<string>) => {
+            if (action.payload === "") {
+                state.filteredWords = state.card &&
+                    state.card.words && [...state.card.words];
+                return;
+            }
             state.filteredWords =
                 state.card.words &&
                 state.card.words.filter((word) => {
@@ -53,5 +61,5 @@ const cardSlice = createSlice({
 });
 
 const { actions, reducer } = cardSlice;
-export const { setCardSliceData, filterWords } = actions;
+export const { setCardSliceData, filterWords, editCardData } = actions;
 export default reducer;

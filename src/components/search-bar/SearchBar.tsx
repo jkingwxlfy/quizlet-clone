@@ -4,7 +4,7 @@ import { useAppDispatch } from "../../hooks/redux";
 
 import "./searchbar.sass";
 
-const SearchBar = () => {
+const SearchBar: React.FC = () => {
     const [input, setInput] = useState("");
     const dispatch = useAppDispatch();
 

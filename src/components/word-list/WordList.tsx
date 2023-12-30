@@ -8,14 +8,12 @@ import "./wordlist.sass";
 const WordList: React.FC = () => {
     const { filteredWords, card } = useAppSelector((state) => state.cardSlice);
 
-    const array = !filteredWords
-        ? card.words && card.words
-        : filteredWords && filteredWords;
+    const words = filteredWords ? filteredWords : card.words && card.words;
 
     return (
         <div className="word-list">
-            {array.length ? (
-                array.map((word: IWord) => (
+            {words && words.length ? (
+                words.map((word: IWord) => (
                     <WordListItem word={word} key={word.id} />
                 ))
             ) : (

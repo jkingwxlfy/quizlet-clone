@@ -1,5 +1,5 @@
 import { useEditBoardMutation } from "../../store/reducers/apiSlice";
-import { setNewBoard } from "../../store/reducers/boardsSlice";
+import { editCardData } from "../../store/reducers/cardSlice";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { ICard } from "../../models/IBoard";
 import { useState } from "react";
@@ -14,20 +14,18 @@ const CardFormEdit: React.FC<CardFormEditProps> = ({ setModal }) => {
     const [editBoard] = useEditBoardMutation();
     const dispatch = useAppDispatch();
 
-    const newCards =
-        board.cards &&
-        board.cards.map((cardItem: ICard) => {
-            if (cardItem.id === card.id) {
-                return { ...cardItem, title: input };
-            } else {
-                return cardItem;
-            }
-        });
-
     const changeName = () => {
-        const newBoard = { ...board, cards: newCards };
-        dispatch(setNewBoard(newBoard));
-        editBoard(newBoard);
+        const newCards =
+            board.cards &&
+            board.cards.map((cardItem: ICard) => {
+                if (cardItem.id === card.id) {
+                    return { ...cardItem, title: input };
+                } else {
+                    return cardItem;
+                }
+            });
+        dispatch(editCardData({ ...card, title: input }));
+        editBoard({ ...board, cards: newCards });
         setModal(false);
         setInput("");
     };

@@ -1,6 +1,6 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { setCardSliceData } from "../../store/reducers/cardSlice";
+import { filterWords, setCardSliceData } from "../../store/reducers/cardSlice";
 import useBoards from "../../hooks/useBoards";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 
@@ -35,6 +35,10 @@ const CardPage: React.FC = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [fetchedBoards]);
 
+    useEffect(() => {
+        dispatch(filterWords(""));
+    }, []);
+
     if (isLoading) {
         return <Spinner />;
     } else if (isError) {
@@ -52,8 +56,8 @@ const CardPage: React.FC = () => {
                         Back
                     </button>
                     <h1 className="card-page__title">
-                        {card.title && card.title} (
-                        {card.words && card.words.length})
+                        {card && card.title && card.title} (
+                        {card && card.words && card.words.length})
                     </h1>
                     <button
                         className="card-page__header__button"
