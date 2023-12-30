@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useEditBoardMutation } from "../../store/reducers/apiSlice";
-import { editCardData } from "../../store/reducers/cardSlice";
+import { editCardData, filterWords } from "../../store/reducers/cardSlice";
 import { ICard, IWord } from "../../models/IBoard";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 
@@ -33,6 +33,7 @@ const WordListItem: React.FC<WordListItemProps> = ({ word }) => {
         });
         editBoard({ ...board, cards: newCards });
         dispatch(editCardData(newCard));
+        dispatch(filterWords());
     };
 
     const onEditWord = () => {
@@ -62,7 +63,7 @@ const WordListItem: React.FC<WordListItemProps> = ({ word }) => {
         });
         editBoard({ ...board, cards: newCards });
         dispatch(editCardData(newCard));
-
+        dispatch(filterWords());
         setIsEditing(false);
         setExpression("");
         setDefinition("");

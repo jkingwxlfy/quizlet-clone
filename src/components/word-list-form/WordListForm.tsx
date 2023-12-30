@@ -2,13 +2,15 @@ import { useState } from "react";
 import { useEditBoardMutation } from "../../store/reducers/apiSlice";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { ICard, IWord } from "../../models/IBoard";
-import { setNewBoard } from "../../store/reducers/boardsSlice";
+import { editCardData, setSearchQuery } from "../../store/reducers/cardSlice";
 import { v4 as uuidv4 } from "uuid";
 
 import "./wordlistform.sass";
 
 const WordListForm: React.FC = () => {
-    const { board, card } = useAppSelector((state) => state.cardSlice);
+    const { board, card, searchQuery } = useAppSelector(
+        (state) => state.cardSlice
+    );
     const [expression, setExpression] = useState("");
     const [definition, setDefinition] = useState("");
     const [editBoard] = useEditBoardMutation();
@@ -20,16 +22,16 @@ const WordListForm: React.FC = () => {
             value: definition,
             id: uuidv4(),
         };
-        const newCards: ICard[] = board.cards.map((itemCard: ICard) => {
+        const newCards = board.cards.map((itemCard: ICard) => {
             if (itemCard.id === card.id) {
                 return { ...itemCard, words: [word, ...itemCard.words] };
             } else {
                 return itemCard;
             }
         });
-        const newBoard = { ...board, cards: newCards };
-        editBoard(newBoard);
-        dispatch(setNewBoard(newBoard));
+        editBoard({ ...board, cards: newCards });
+        dispatch(editCardData({ ...card, words: [word, ...card.words] }));
+        dispatch(setSearchQuery(searchQuery));
         setExpression("");
         setDefinition("");
     };

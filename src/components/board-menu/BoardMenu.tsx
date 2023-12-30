@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
 import { useState } from "react";
 import useBoards from "../../hooks/useBoards";
+import { useAppSelector } from "../../hooks/redux";
 
 import BoardMenuItem from "../board-menu-item/BoardMenuItem";
 import BoardMenuForm from "../board-menu-form/BoardMenuForm";
@@ -10,7 +11,8 @@ import "./boardmenu.sass";
 
 const BoardMenu: React.FC = () => {
     const [isModal, setIsModal] = useState(false);
-    const { fetchedBoards, isError, isLoading } = useBoards();
+    const { isError, isLoading } = useBoards();
+    const { boards } = useAppSelector((state) => state.boardsSlice);
 
     if (isLoading) {
         return <Spinner />;
@@ -32,7 +34,7 @@ const BoardMenu: React.FC = () => {
                     <MyModal isModal={isModal} setModal={setIsModal}>
                         <BoardMenuForm setModal={setIsModal} />
                     </MyModal>
-                    {fetchedBoards.map((board) => (
+                    {boards.map((board) => (
                         <BoardMenuItem
                             key={board.id}
                             name={board.title}

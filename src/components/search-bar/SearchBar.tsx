@@ -1,17 +1,17 @@
-import { filterWords } from "../../store/reducers/cardSlice";
-import { useState, useEffect } from "react";
-import { useAppDispatch } from "../../hooks/redux";
+import { filterWords, setSearchQuery } from "../../store/reducers/cardSlice";
+import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 
 import "./searchbar.sass";
 
 const SearchBar: React.FC = () => {
-    const [input, setInput] = useState("");
     const dispatch = useAppDispatch();
+    const { searchQuery } = useAppSelector((state) => state.cardSlice);
 
     useEffect(() => {
-        dispatch(filterWords(input));
+        dispatch(filterWords());
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [input]);
+    }, [searchQuery]);
 
     return (
         <div className="search-bar">
@@ -20,8 +20,10 @@ const SearchBar: React.FC = () => {
                 className="search-bar__input"
                 type="text"
                 placeholder="Enter a search query"
-                value={input}
-                onChange={(event) => setInput(event.target.value)}
+                value={searchQuery}
+                onChange={(event) =>
+                    dispatch(setSearchQuery(event.target.value))
+                }
             />
         </div>
     );

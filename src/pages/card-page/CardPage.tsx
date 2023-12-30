@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { filterWords, setCardSliceData } from "../../store/reducers/cardSlice";
@@ -32,12 +33,12 @@ const CardPage: React.FC = () => {
                 })
             );
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [fetchedBoards]);
 
     useEffect(() => {
-        dispatch(filterWords(""));
-    }, []);
+        dispatch(filterWords());
+        console.log("card page effect");
+    }, [card]);
 
     if (isLoading) {
         return <Spinner />;

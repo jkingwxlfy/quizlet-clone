@@ -14,10 +14,27 @@ interface ID {
     cardId: string;
 }
 
-const initialState = {
-    board: {} as IBoard,
-    card: {} as ICard,
-    filteredWords: [] as IWord[],
+interface sliceState {
+    board: IBoard;
+    card: ICard;
+    filteredWords: IWord[];
+    searchQuery: string;
+}
+
+const initialState: sliceState = {
+    board: {
+        id: "",
+        title: "",
+        cards: [] as ICard[],
+    },
+    card: {
+        id: "",
+        title: "",
+        completed: false,
+        words: [] as IWord[],
+    },
+    filteredWords: [],
+    searchQuery: "",
 };
 
 const cardSlice = createSlice({
@@ -38,28 +55,25 @@ const cardSlice = createSlice({
         editCardData: (state, action: PayloadAction<ICard>) => {
             state.card = { ...action.payload };
         },
-        filterWords: (state, action: PayloadAction<string>) => {
-            if (action.payload === "") {
-                state.filteredWords = state.card &&
-                    state.card.words && [...state.card.words];
-                return;
-            }
-            state.filteredWords =
-                state.card.words &&
-                state.card.words.filter((word) => {
-                    return (
-                        word.value
-                            .toLowerCase()
-                            .includes(action.payload.toLowerCase()) ||
-                        word.word
-                            .toLowerCase()
-                            .includes(action.payload.toLowerCase())
-                    );
-                });
+        setSearchQuery: (state, action: PayloadAction<string>) => {
+            state.searchQuery = action.payload;
+        },
+        filterWords: (state) => {
+            state.filteredWords = [...state.card.words].filter((word) => {
+                return (
+                    word.value
+                        .toLowerCase()
+                        .includes(state.searchQuery.toLowerCase()) ||
+                    word.word
+                        .toLowerCase()
+                        .includes(state.searchQuery.toLowerCase())
+                );
+            });
         },
     },
 });
 
 const { actions, reducer } = cardSlice;
-export const { setCardSliceData, filterWords, editCardData } = actions;
+export const { setCardSliceData, filterWords, editCardData, setSearchQuery } =
+    actions;
 export default reducer;
