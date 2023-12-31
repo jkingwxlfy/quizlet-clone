@@ -16,7 +16,11 @@ const CardListItem: React.FC<CardListItemProps> = ({ card, board }) => {
 
     return (
         <div className="card-list-item">
-            <div className="card-list-item__title">
+            <div
+                className={`card-list-item__title ${
+                    card.completed && card.completed ? "completed" : ""
+                }`}
+            >
                 {title ? title : card.title}
             </div>
             <Link
