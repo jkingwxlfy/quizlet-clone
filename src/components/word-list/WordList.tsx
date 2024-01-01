@@ -8,7 +8,9 @@ import "./wordlist.sass";
 const WordList: React.FC = () => {
     const { filteredWords, card } = useAppSelector((state) => state.cardSlice);
 
-    const words = filteredWords ? filteredWords : card.words && card.words;
+    const words = filteredWords
+        ? filteredWords
+        : card && card.words && card.words;
 
     return (
         <div className="word-list">

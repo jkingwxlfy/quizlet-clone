@@ -1,9 +1,12 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect, ChangeEvent, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { setCardSliceData } from "../../store/reducers/cardSlice";
 import useBoards from "../../hooks/useBoards";
 import { IAnswer } from "../../models/IAnswer";
+import { IWord } from "../../models/IBoard";
+import shuffle from "../../utils/shuffleArray";
 
 import { Spinner, Error } from "../../components/UI";
 
@@ -21,6 +24,7 @@ const TestModePage: React.FC = () => {
     const [wrongCount, setWrongCount] = useState(0);
     const [rightCount, setRightCount] = useState(0);
     const inputRefs = useRef<HTMLInputElement[]>([]);
+    const [words, setWords] = useState([] as IWord[]);
 
     useEffect(() => {
         if (boardId && cardId && !isLoading && !isError) {
@@ -31,17 +35,20 @@ const TestModePage: React.FC = () => {
                 })
             );
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [fetchedBoards]);
 
     useEffect(() => {
+        setWords(card.words && [...card.words]);
+    }, [card]);
+
+    useEffect(() => {
         setInputWords(
-            card.words &&
-                card.words.map((item) => {
+            words &&
+                words.map((item) => {
                     return { ...item, input: "", answer: "" };
                 })
         );
-    }, [card]);
+    }, [words]);
 
     const onSetInput = (event: ChangeEvent<HTMLInputElement>, id: string) => {
         setInputWords((prevState) =>
@@ -108,13 +115,14 @@ const TestModePage: React.FC = () => {
     };
 
     const onRetryTest = () => {
-        setFilledAnswersCount(0);
+        setWords(shuffle(words));
         setInputWords(
-            card.words &&
-                card.words.map((item) => {
+            words &&
+                words.map((item) => {
                     return { ...item, input: "", answer: "" };
                 })
         );
+        setFilledAnswersCount(0);
         setIsShowedResults(false);
         setWrongCount(0);
         setRightCount(0);
@@ -197,6 +205,7 @@ const TestModePage: React.FC = () => {
                                         type="text"
                                         placeholder="answer"
                                         value={word.input}
+                                        disabled={isShowedResults}
                                         onChange={(event) =>
                                             onSetInput(event, word.id)
                                         }

@@ -12,7 +12,7 @@ const ModeListItem: React.FC<ModeListItemProps> = ({ name }) => {
     return (
         <Link
             className="mode-list-item"
-            to={`/boards/${board.id}/${card.id}/${name}`}
+            to={`/boards/${board.id}/${card && card.id && card.id}/${name}`}
         >
             {name}
         </Link>

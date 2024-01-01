@@ -78,7 +78,9 @@ const CardPage: React.FC = () => {
                 </button>
                 <h1
                     className={`card-page__title ${
-                        card.completed && card.completed ? "completed" : ""
+                        card && card.completed && card.completed
+                            ? "completed"
+                            : ""
                     }`}
                 >
                     {card && card.title && card.title} (
@@ -90,7 +92,7 @@ const CardPage: React.FC = () => {
                         className="card-page__checkbox"
                         type="checkbox"
                         onChange={(event) => onSetCompletedCard(event)}
-                        checked={card.completed && card.completed}
+                        checked={card && card.completed && card.completed}
                     />
                 </label>
                 <button

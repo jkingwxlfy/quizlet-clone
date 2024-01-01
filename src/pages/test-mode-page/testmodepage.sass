@@ -6,7 +6,8 @@
         flex-direction: column
         justify-content: center
         align-items: center
-        margin: 130px 0
+        margin-top: 130px
+        margin-bottom: 50px
     &__header
         position: fixed
         top: 0
@@ -68,6 +69,9 @@
         font-size: 24px
         &:focus
             border: 3px solid #ac632f
+        &:disabled
+            background-color: #fff
+            color: #000
     &__submit
         @include blue-button
         display: block

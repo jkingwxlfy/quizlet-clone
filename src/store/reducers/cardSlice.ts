@@ -59,16 +59,18 @@ const cardSlice = createSlice({
             state.searchQuery = action.payload;
         },
         filterWords: (state) => {
-            state.filteredWords = [...state.card.words].filter((word) => {
-                return (
-                    word.value
-                        .toLowerCase()
-                        .includes(state.searchQuery.toLowerCase()) ||
-                    word.word
-                        .toLowerCase()
-                        .includes(state.searchQuery.toLowerCase())
-                );
-            });
+            state.filteredWords =
+                state.card &&
+                [...state.card.words].filter((word) => {
+                    return (
+                        word.value
+                            .toLowerCase()
+                            .includes(state.searchQuery.toLowerCase()) ||
+                        word.word
+                            .toLowerCase()
+                            .includes(state.searchQuery.toLowerCase())
+                    );
+                });
         },
     },
 });
