@@ -1,7 +1,7 @@
 import { IWord } from "./IBoard";
 
-export interface IAnswer extends IWord {
+export interface ITestWord extends IWord {
     input: string;
     answer: string;
-    isCorrect?: boolean;
+    isCorrect?: boolean | null;
 }

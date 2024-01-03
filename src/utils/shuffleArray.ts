@@ -1,6 +1,4 @@
-import { IWord } from "../models/IBoard";
-
-function shuffle(array: IWord[]): IWord[] {
+function shuffle<T>(array: T[]): T[] {
     let currentIndex = array.length,
         randomIndex;
 
