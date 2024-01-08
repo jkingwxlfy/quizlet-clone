@@ -3,12 +3,15 @@ import { useState, useEffect } from "react";
 import { useAppSelector } from "../../hooks/redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAppDispatch } from "../../hooks/redux";
-import { setCardSliceData } from "../../store/reducers/cardSlice";
+import {
+    filterWords,
+    setCardSliceData,
+    shuffleFilteredWords,
+} from "../../store/reducers/cardSlice";
 import useBoards from "../../hooks/useBoards";
 import { IWord } from "../../models/IBoard";
-import shuffle from "../../utils/shuffleArray";
 
-import { Spinner, Error } from "../../components/UI";
+import { Spinner, Error, Star } from "../../components/UI";
 
 import "./cardmodepage.sass";
 
@@ -17,12 +20,11 @@ const CardModePage: React.FC = () => {
     const dispatch = useAppDispatch();
     const { boardId, cardId } = useParams();
     const { fetchedBoards, isError, isLoading } = useBoards();
-    const { card } = useAppSelector((state) => state.cardSlice);
+    const { card, filteredWords } = useAppSelector((state) => state.cardSlice);
 
     const [index, setIndex] = useState(0);
     const [currentWord, setCurrentWord] = useState({} as IWord);
     const [isHidden, setIsHidden] = useState(false);
-    const [words, setWords] = useState([] as IWord[]);
 
     useEffect(() => {
         if (boardId && cardId && !isLoading && !isError) {
@@ -36,21 +38,21 @@ const CardModePage: React.FC = () => {
     }, [fetchedBoards]);
 
     useEffect(() => {
-        if (card.words !== undefined) {
-            setWords([...card.words]);
-        }
+        dispatch(filterWords());
     }, [card]);
 
     useEffect(() => {
-        if (words.length) {
-            setCurrentWord(words[index]);
+        if (filteredWords.length) {
+            setCurrentWord(filteredWords[index]);
             setIsHidden(false);
+        } else {
+            navigate(-1);
         }
-    }, [words, index]);
+    }, [filteredWords, index]);
 
     const onNext = () => {
-        if (words.length) {
-            if (index < words.length - 1) {
+        if (filteredWords.length) {
+            if (index < filteredWords.length - 1) {
                 setIndex(index + 1);
             } else {
                 setIndex(0);
@@ -59,9 +61,9 @@ const CardModePage: React.FC = () => {
     };
 
     const onPrev = () => {
-        if (words.length) {
+        if (filteredWords.length) {
             if (index === 0) {
-                setIndex(card.words.length - 1);
+                setIndex(filteredWords.length - 1);
             } else {
                 setIndex(index - 1);
             }
@@ -69,8 +71,8 @@ const CardModePage: React.FC = () => {
     };
 
     const onShuffle = () => {
-        setWords(shuffle(words));
-        setCurrentWord(words[index]);
+        dispatch(shuffleFilteredWords());
+        setCurrentWord(filteredWords[index]);
         setIndex(0);
     };
 
@@ -88,7 +90,7 @@ const CardModePage: React.FC = () => {
             <div className="container">
                 <div className="card-mode-page__header">
                     <div className="card-mode-page__title">
-                        {index + 1} / {card.words && card.words.length} <br />
+                        {index + 1} / {filteredWords.length} <br />
                         {card.title && card.title}
                     </div>
                 </div>
@@ -98,9 +100,15 @@ const CardModePage: React.FC = () => {
                         onClick={() => setIsHidden(!isHidden)}
                     >
                         <div className="card-mode-page__word">
-                            {currentWord && isHidden
+                            {currentWord !== undefined && isHidden
                                 ? currentWord.word
                                 : currentWord.value}
+                        </div>
+                        <div className="card-mode-page__star">
+                            <Star
+                                id={currentWord.id}
+                                checked={currentWord.starred}
+                            />
                         </div>
                     </div>
                     <div className="card-mode-page__buttons">

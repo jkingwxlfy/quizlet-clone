@@ -5,8 +5,7 @@ import {
     setTestWords,
     setFilledAnswerCount,
 } from "../../store/reducers/cardSlice";
-
-import "./testpagelistitem.sass";
+import { Star } from "../UI";
 
 interface TestPageListItemProps {
     word: ITestWord;
@@ -84,6 +83,9 @@ const TestPageListItem: React.FC<TestPageListItemProps> = ({
         <div className={`test-mode-page__item ${correct}`}>
             <div className="test-mode-page__count">
                 {index + 1} of {testWords.length}
+                <div className="test-mode-page__star">
+                    <Star id={word.id} checked={word.starred} />
+                </div>
             </div>
             <div className="test-mode-page__value">{word.value}</div>
             <div className={`test-mode-page__answer ${correct}`}>

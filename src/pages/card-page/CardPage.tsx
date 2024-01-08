@@ -43,12 +43,11 @@ const CardPage: React.FC = () => {
 
     useEffect(() => {
         dispatch(filterWords());
-        console.log("card page effect");
     }, [card]);
 
     const onSetCompletedCard = (event: ChangeEvent<HTMLInputElement>) => {
         const completed = event.target.checked;
-        const newCards =
+        const cards =
             board.cards &&
             board.cards.map((cardItem) => {
                 if (cardItem.id === card.id) {
@@ -58,7 +57,13 @@ const CardPage: React.FC = () => {
                 }
             });
         dispatch(editCardData({ ...card, completed }));
-        editBoard({ ...board, cards: newCards });
+        editBoard({ ...board, cards });
+    };
+
+    const onClosePage = () => {
+        navigate(-1);
+        dispatch(editCardData({ ...card, onlyStars: false }));
+        localStorage.setItem("onlyStars", "false");
     };
 
     if (isLoading) {
@@ -72,7 +77,7 @@ const CardPage: React.FC = () => {
             <div className="card-page__header">
                 <button
                     className="card-page__header__link"
-                    onClick={() => navigate(-1)}
+                    onClick={onClosePage}
                 >
                     Back
                 </button>

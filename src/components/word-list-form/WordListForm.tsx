@@ -20,6 +20,7 @@ const WordListForm: React.FC = () => {
         const word: IWord = {
             word: expression,
             value: definition,
+            starred: false,
             id: uuidv4(),
         };
         const newCards = board.cards.map((itemCard: ICard) => {

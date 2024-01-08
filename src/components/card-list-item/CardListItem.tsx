@@ -1,7 +1,7 @@
+import { ICard, IBoard } from "../../models/IBoard";
 import { Link } from "react-router-dom";
 
 import "./cardlistitem.sass";
-import { ICard, IBoard } from "../../models/IBoard";
 
 interface CardListItemProps {
     card: ICard;

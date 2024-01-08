@@ -3,8 +3,6 @@ import { useRef } from "react";
 
 import TestPageListItem from "../test-page-list-item/TestPageListItem";
 
-import "./testpagelist.sass";
-
 interface TestPageListProps {
     words: ITestWord[];
 }

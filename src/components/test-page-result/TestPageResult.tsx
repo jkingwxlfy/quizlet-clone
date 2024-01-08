@@ -1,5 +1,3 @@
-import "./testpageresult.sass";
-
 interface TestPageResultProps {
     isShowedResults: boolean;
     rightCount: number;

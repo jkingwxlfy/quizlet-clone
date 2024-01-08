@@ -4,6 +4,8 @@ import { editCardData, filterWords } from "../../store/reducers/cardSlice";
 import { ICard, IWord } from "../../models/IBoard";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 
+import { Star } from "../UI";
+
 import "./wordlistitem.sass";
 
 interface WordListItemProps {
@@ -101,7 +103,11 @@ const WordListItem: React.FC<WordListItemProps> = ({ word }) => {
                     value={definition}
                     onChange={(event) => setDefinition(event.target.value)}
                 />
-                <button className={clazzButton} onClick={onEditWord}>
+                <button
+                    className={clazzButton}
+                    onClick={onEditWord}
+                    style={{ marginLeft: "15px" }}
+                >
                     Save
                 </button>
             </div>
@@ -118,6 +124,7 @@ const WordListItem: React.FC<WordListItemProps> = ({ word }) => {
                 >
                     Delete
                 </button>
+                <Star id={word.id} checked={word.starred} />
             </div>
         </div>
     );

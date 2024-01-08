@@ -3,11 +3,13 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import {
+    filterWords,
     setCardSliceData,
     setFilledAnswerCount,
+    setIsShowedResults,
+    shuffleFilteredWords,
 } from "../../store/reducers/cardSlice";
 import useBoards from "../../hooks/useBoards";
-import shuffle from "../../utils/shuffleArray";
 import { setTestWords } from "../../store/reducers/cardSlice";
 
 import TestPageList from "../../components/test-page-list/TestPageList";
@@ -21,10 +23,13 @@ const TestModePage: React.FC = () => {
     const dispatch = useAppDispatch();
     const { boardId, cardId } = useParams();
     const { fetchedBoards, isError, isLoading } = useBoards();
-    const { card, testWords, filledAnswersCount } = useAppSelector(
-        (state) => state.cardSlice
-    );
-    const [isShowedResults, setIsShowedResults] = useState(false);
+    const {
+        card,
+        testWords,
+        filledAnswersCount,
+        isShowedResult,
+        filteredWords,
+    } = useAppSelector((state) => state.cardSlice);
     const [wrongCount, setWrongCount] = useState(0);
     const [rightCount, setRightCount] = useState(0);
 
@@ -36,18 +41,27 @@ const TestModePage: React.FC = () => {
                     id: { boardId, cardId },
                 })
             );
+            dispatch(filterWords());
         }
     }, [fetchedBoards]);
 
     useEffect(() => {
-        const testWords =
-            card.words &&
-            card.words.map((item) => {
-                return { ...item, input: "", answer: "" };
-            });
-
+        const testWords = filteredWords.map((item) => {
+            return { ...item, input: "", answer: "" };
+        });
         dispatch(setTestWords(testWords));
-    }, [card]);
+
+        if (!filteredWords.length) {
+            navigate(-1);
+        }
+    }, [filteredWords]);
+
+    useEffect(() => {
+        return () => {
+            dispatch(setIsShowedResults(false));
+            dispatch(setFilledAnswerCount(0));
+        };
+    }, []);
 
     const onSubmitTest = () => {
         const newTestWords = testWords.map((item) => {
@@ -59,7 +73,7 @@ const TestModePage: React.FC = () => {
             return { ...item, isCorrect: false };
         });
         dispatch(setTestWords(newTestWords));
-        setIsShowedResults(true);
+        dispatch(setIsShowedResults(true));
         window.scrollTo({
             top: 0,
             behavior: "smooth",
@@ -67,14 +81,9 @@ const TestModePage: React.FC = () => {
     };
 
     const onRetryTest = () => {
-        const newTestWords = shuffle(
-            testWords.map((word) => {
-                return { ...word, input: "", answer: "", isCorrect: null };
-            })
-        );
-        dispatch(setTestWords(newTestWords));
+        dispatch(shuffleFilteredWords());
         dispatch(setFilledAnswerCount(0));
-        setIsShowedResults(false);
+        dispatch(setIsShowedResults(false));
         setWrongCount(0);
         setRightCount(0);
     };
@@ -104,7 +113,7 @@ const TestModePage: React.FC = () => {
             <div className="container">
                 <div className="test-mode-page__container">
                     <TestPageResult
-                        isShowedResults={isShowedResults}
+                        isShowedResults={isShowedResult}
                         rightCount={rightCount}
                         wrongCount={wrongCount}
                         onRetryTest={onRetryTest}
@@ -112,9 +121,9 @@ const TestModePage: React.FC = () => {
                     <TestPageList words={testWords} />
                 </div>
                 <button
-                    disabled={isShowedResults}
+                    disabled={isShowedResult}
                     className={`test-mode-page__submit ${
-                        isShowedResults ? "disabled" : ""
+                        isShowedResult ? "disabled" : ""
                     }`}
                     onClick={onSubmitTest}
                 >

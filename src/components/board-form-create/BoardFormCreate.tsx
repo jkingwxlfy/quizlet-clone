@@ -23,7 +23,13 @@ const BoardFormCreate: React.FC<BoardFormCreateProps> = ({
             ...board,
             cards: [
                 ...board.cards,
-                { id: uuidv4(), title: input, completed: false, words: [] },
+                {
+                    id: uuidv4(),
+                    title: input,
+                    completed: false,
+                    onlyStars: false,
+                    words: [],
+                },
             ],
         };
         editBoard(newBoard);

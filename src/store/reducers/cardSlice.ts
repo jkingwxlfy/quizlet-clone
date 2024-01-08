@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
+import shuffle from "../../utils/shuffleArray";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import type { IBoard, ICard, IWord } from "../../models/IBoard";
-import { ITestWord } from "../../models/ITestWord";
+import type { ITestWord } from "../../models/ITestWord";
 
 interface PayloadActionBoards<Boards, ID> {
     payload: {
@@ -35,6 +36,7 @@ const initialState: sliceState = {
         id: "",
         title: "",
         completed: false,
+        onlyStars: false,
         words: [] as IWord[],
     },
     filteredWords: [],
@@ -66,18 +68,29 @@ const cardSlice = createSlice({
             state.searchQuery = action.payload;
         },
         filterWords: (state) => {
-            state.filteredWords =
-                state.card &&
-                [...state.card.words].filter((word) => {
+            state.card.onlyStars = localStorage.getItem("onlyStars") === "true";
+            state.filteredWords = [...state.card.words].filter((word) => {
+                if (state.card.onlyStars) {
                     return (
-                        word.value
-                            .toLowerCase()
-                            .includes(state.searchQuery.toLowerCase()) ||
-                        word.word
-                            .toLowerCase()
-                            .includes(state.searchQuery.toLowerCase())
+                        (word.starred &&
+                            word.value
+                                .toLowerCase()
+                                .includes(state.searchQuery.toLowerCase())) ||
+                        (word.starred &&
+                            word.word
+                                .toLowerCase()
+                                .includes(state.searchQuery.toLowerCase()))
                     );
-                });
+                }
+                return (
+                    word.value
+                        .toLowerCase()
+                        .includes(state.searchQuery.toLowerCase()) ||
+                    word.word
+                        .toLowerCase()
+                        .includes(state.searchQuery.toLowerCase())
+                );
+            });
         },
         setTestWords: (state, action: PayloadAction<ITestWord[]>) => {
             state.testWords = action.payload;
@@ -87,6 +100,9 @@ const cardSlice = createSlice({
         },
         setIsShowedResults: (state, action: PayloadAction<boolean>) => {
             state.isShowedResult = action.payload;
+        },
+        shuffleFilteredWords: (state) => {
+            state.filteredWords = shuffle(state.filteredWords);
         },
     },
 });
@@ -100,5 +116,6 @@ export const {
     setTestWords,
     setFilledAnswerCount,
     setIsShowedResults,
+    shuffleFilteredWords,
 } = actions;
 export default reducer;
