@@ -9,8 +9,9 @@ import {
     setIsShowedResults,
     shuffleFilteredWords,
 } from "../../store/reducers/cardSlice";
-import useBoards from "../../hooks/useBoards";
 import { setTestWords } from "../../store/reducers/cardSlice";
+import { useGetBoardsQuery } from "../../store/reducers/apiSlice";
+import { IBoard } from "../../models/IBoard";
 
 import TestPageList from "../../components/test-page-list/TestPageList";
 import TestPageResult from "../../components/test-page-result/TestPageResult";
@@ -22,7 +23,11 @@ const TestModePage: React.FC = () => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const { boardId, cardId } = useParams();
-    const { fetchedBoards, isError, isLoading } = useBoards();
+    const {
+        data: fetchedBoards = [] as IBoard[],
+        isError,
+        isLoading,
+    } = useGetBoardsQuery("");
     const {
         card,
         testWords,
@@ -46,10 +51,41 @@ const TestModePage: React.FC = () => {
     }, [fetchedBoards]);
 
     useEffect(() => {
-        const testWords = filteredWords.map((item) => {
-            return { ...item, input: "", answer: "" };
-        });
-        dispatch(setTestWords(testWords));
+        if (testWords.length && !card.onlyStars) {
+            const newTestWords = testWords.map((item) => {
+                for (let key = 0; key < filteredWords.length; key++) {
+                    if (
+                        item.id === filteredWords[key].id &&
+                        item.starred !== filteredWords[key].starred
+                    ) {
+                        return { ...item, starred: filteredWords[key].starred };
+                    }
+                }
+                return item;
+            });
+            dispatch(setTestWords(newTestWords));
+        } else if (testWords.length && card.onlyStars) {
+            const newTestWords = testWords.filter((item) => {
+                const correspondingFilteredItem = filteredWords.find(
+                    (filteredItem) => item.id === filteredItem.id
+                );
+                if (correspondingFilteredItem) {
+                    return correspondingFilteredItem
+                        ? item.starred === correspondingFilteredItem.starred
+                        : false;
+                }
+                return false;
+            });
+            if (testWords.length !== 0 && filledAnswersCount !== 0) {
+                dispatch(setFilledAnswerCount(filledAnswersCount - 1));
+            }
+            dispatch(setTestWords(newTestWords));
+        } else {
+            const testWords = filteredWords.map((item) => {
+                return { ...item, answer: "", input: "" };
+            });
+            dispatch(setTestWords(testWords));
+        }
 
         if (!filteredWords.length) {
             navigate(-1);
@@ -105,7 +141,7 @@ const TestModePage: React.FC = () => {
                 </div>
 
                 <div className="card-mode-page__title">
-                    {filledAnswersCount} / {card.words && card.words.length}
+                    {filledAnswersCount} / {testWords.length}
                     <br />
                     {card.title && card.title}
                 </div>
@@ -118,7 +154,7 @@ const TestModePage: React.FC = () => {
                         wrongCount={wrongCount}
                         onRetryTest={onRetryTest}
                     />
-                    <TestPageList words={testWords} />
+                    <TestPageList />
                 </div>
                 <button
                     disabled={isShowedResult}

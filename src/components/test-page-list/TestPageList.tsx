@@ -1,18 +1,15 @@
-import { ITestWord } from "../../models/ITestWord";
 import { useRef } from "react";
+import { useAppSelector } from "../../hooks/redux";
 
 import TestPageListItem from "../test-page-list-item/TestPageListItem";
 
-interface TestPageListProps {
-    words: ITestWord[];
-}
-
-const TestPageList: React.FC<TestPageListProps> = ({ words }) => {
+const TestPageList: React.FC = () => {
     const inputRefs = useRef<HTMLInputElement[]>([]);
+    const { testWords } = useAppSelector((state) => state.cardSlice);
 
     return (
         <>
-            {words.map((word, key) => (
+            {testWords.map((word, key) => (
                 <TestPageListItem
                     key={word.id}
                     word={word}

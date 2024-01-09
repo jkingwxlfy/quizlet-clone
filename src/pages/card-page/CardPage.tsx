@@ -1,14 +1,17 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEditBoardMutation } from "../../store/reducers/apiSlice";
+import {
+    useEditBoardMutation,
+    useGetBoardsQuery,
+} from "../../store/reducers/apiSlice";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect, ChangeEvent } from "react";
-import useBoards from "../../hooks/useBoards";
 import {
     filterWords,
     setCardSliceData,
     editCardData,
 } from "../../store/reducers/cardSlice";
+import { IBoard } from "../../models/IBoard";
 
 import ModeList from "../../components/mode-list/ModeList";
 import WordList from "../../components/word-list/WordList";
@@ -26,7 +29,11 @@ const CardPage: React.FC = () => {
     const [editCardModal, setEditCardModal] = useState(false);
     const [deleteCardModal, setDeleteCardModal] = useState(false);
     const dispatch = useAppDispatch();
-    const { fetchedBoards, isError, isLoading } = useBoards();
+    const {
+        data: fetchedBoards = [] as IBoard[],
+        isError,
+        isLoading,
+    } = useGetBoardsQuery("");
     const [editBoard] = useEditBoardMutation();
     const { card, board } = useAppSelector((state) => state.cardSlice);
 

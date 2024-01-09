@@ -8,8 +8,8 @@ import {
     setCardSliceData,
     shuffleFilteredWords,
 } from "../../store/reducers/cardSlice";
-import useBoards from "../../hooks/useBoards";
-import { IWord } from "../../models/IBoard";
+import { IWord, IBoard } from "../../models/IBoard";
+import { useGetBoardsQuery } from "../../store/reducers/apiSlice";
 
 import { Spinner, Error, Star } from "../../components/UI";
 
@@ -19,7 +19,11 @@ const CardModePage: React.FC = () => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const { boardId, cardId } = useParams();
-    const { fetchedBoards, isError, isLoading } = useBoards();
+    const {
+        data: fetchedBoards = [] as IBoard[],
+        isError,
+        isLoading,
+    } = useGetBoardsQuery("");
     const { card, filteredWords } = useAppSelector((state) => state.cardSlice);
 
     const [index, setIndex] = useState(0);
