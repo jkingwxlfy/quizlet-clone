@@ -73,7 +73,7 @@ const TestPageListItem: React.FC<TestPageListItemProps> = ({
     };
 
     const correct =
-        word.isCorrect === null || word.isCorrect === undefined
+        word.isCorrect === undefined || word.isCorrect === null
             ? ""
             : word.isCorrect
             ? "correct"

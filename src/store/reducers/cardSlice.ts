@@ -41,7 +41,7 @@ const initialState: sliceState = {
     },
     filteredWords: [],
     searchQuery: "",
-    testWords: [],
+    testWords: [] as ITestWord[],
     isShowedResult: false,
     filledAnswersCount: 0,
 };
@@ -104,6 +104,11 @@ const cardSlice = createSlice({
         shuffleFilteredWords: (state) => {
             state.filteredWords = shuffle(state.filteredWords);
         },
+        resetAndShuffleTestWords: (state) => {
+            state.testWords = shuffle(state.filteredWords).map((words) => {
+                return { ...words, answer: "", input: "", isCorrect: null };
+            });
+        },
     },
 });
 
@@ -117,5 +122,6 @@ export const {
     setFilledAnswerCount,
     setIsShowedResults,
     shuffleFilteredWords,
+    resetAndShuffleTestWords,
 } = actions;
 export default reducer;

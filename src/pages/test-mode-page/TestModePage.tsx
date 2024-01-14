@@ -4,10 +4,10 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import {
     filterWords,
+    resetAndShuffleTestWords,
     setCardSliceData,
     setFilledAnswerCount,
     setIsShowedResults,
-    shuffleFilteredWords,
 } from "../../store/reducers/cardSlice";
 import { setTestWords } from "../../store/reducers/cardSlice";
 import { useGetBoardsQuery } from "../../store/reducers/apiSlice";
@@ -82,7 +82,7 @@ const TestModePage: React.FC = () => {
             dispatch(setTestWords(newTestWords));
         } else {
             const testWords = filteredWords.map((item) => {
-                return { ...item, answer: "", input: "" };
+                return { ...item, answer: "", input: "", isCorrect: null };
             });
             dispatch(setTestWords(testWords));
         }
@@ -117,7 +117,7 @@ const TestModePage: React.FC = () => {
     };
 
     const onRetryTest = () => {
-        dispatch(shuffleFilteredWords());
+        dispatch(resetAndShuffleTestWords());
         dispatch(setFilledAnswerCount(0));
         dispatch(setIsShowedResults(false));
         setWrongCount(0);
