@@ -20,6 +20,7 @@ const BoardMenu: React.FC = () => {
     } = useGetBoardsQuery("");
     const dispatch = useAppDispatch();
     const { boards } = useAppSelector((state) => state.boardsSlice);
+    const [createInput, setCreateInput] = useState("");
 
     if (isLoading) {
         return <Spinner />;
@@ -30,7 +31,7 @@ const BoardMenu: React.FC = () => {
     }
 
     return (
-        <section className="board__container">
+        <section className="app">
             <section className="board-menu">
                 <div className="board-menu__container">
                     <h1 className="board-menu__title">Boards</h1>
@@ -40,8 +41,16 @@ const BoardMenu: React.FC = () => {
                     >
                         Create board
                     </button>
-                    <MyModal isModal={isModal} setModal={setIsModal}>
-                        <BoardMenuForm setModal={setIsModal} />
+                    <MyModal
+                        isModal={isModal}
+                        setModal={setIsModal}
+                        setInput={setCreateInput}
+                    >
+                        <BoardMenuForm
+                            setModal={setIsModal}
+                            input={createInput}
+                            setInput={setCreateInput}
+                        />
                     </MyModal>
                     {boards.map((board) => (
                         <BoardMenuItem

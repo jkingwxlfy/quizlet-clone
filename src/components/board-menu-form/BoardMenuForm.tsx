@@ -2,20 +2,31 @@ import React, { useState } from "react";
 import { useCreateBoardMutation } from "../../store/reducers/apiSlice";
 import { v4 as uuidv4 } from "uuid";
 import { createOneBoard } from "../../store/reducers/boardsSlice";
-import { useAppDispatch } from "../../hooks/redux";
+import { useAppDispatch, useAppSelector } from "../../hooks/redux";
+import { setInputFormError } from "../../store/reducers/boardsSlice";
 
 import "./boardmenuform.sass";
 
 interface BoardMenuFormProps {
     setModal: (isModal: boolean) => void;
+    input: string;
+    setInput: (value: string) => void;
 }
 
-const BoardMenuForm: React.FC<BoardMenuFormProps> = ({ setModal }) => {
-    const [input, setInput] = useState("");
+const BoardMenuForm: React.FC<BoardMenuFormProps> = ({
+    setModal,
+    input,
+    setInput,
+}) => {
     const [createBoard] = useCreateBoardMutation();
     const dispatch = useAppDispatch();
+    const { inputFormError } = useAppSelector((state) => state.boardsSlice);
 
     const onCreateBoard = () => {
+        if (input.length > 35) {
+            dispatch(setInputFormError(true));
+            return;
+        }
         const newBoard = { id: uuidv4(), title: input, cards: [] };
         createBoard(newBoard);
         dispatch(createOneBoard(newBoard));
@@ -27,12 +38,15 @@ const BoardMenuForm: React.FC<BoardMenuFormProps> = ({ setModal }) => {
         <div className="board-menu-form">
             <h1 className="board-menu-form__title">Enter a board name</h1>
             <input
-                className="board-menu-form__input"
+                className={`board-menu-form__input${
+                    inputFormError ? " error" : ""
+                }`}
                 placeholder="name"
                 type="text"
                 value={input}
                 onChange={(event) => setInput(event.target.value)}
             />
+            {inputFormError ? "Max length 35" : ""}
             <button className="board-menu-form__button" onClick={onCreateBoard}>
                 Create
             </button>

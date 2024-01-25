@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 
 import "./boardmenuitem.sass";
 
@@ -9,7 +9,7 @@ interface BoardMenuItemProps {
 
 const BoardMenuItem: React.FC<BoardMenuItemProps> = ({ name, id }) => {
     return (
-        <section className="board-menu-item">
+        <Link className="board-menu-item" to={`/boards/${id}`}>
             <div className="board-menu-item__name">{name}</div>
             <NavLink
                 className={(navData) =>
@@ -21,7 +21,7 @@ const BoardMenuItem: React.FC<BoardMenuItemProps> = ({ name, id }) => {
             >
                 Open
             </NavLink>
-        </section>
+        </Link>
     );
 };
 

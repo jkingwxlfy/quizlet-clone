@@ -18,6 +18,8 @@ const BoardPage: React.FC = () => {
     const [editBoardModal, setEditBoardModal] = useState(false);
     const [deleteBoardModal, setDeleteBoardModal] = useState(false);
     const [createCardModal, setCreateCardModal] = useState(false);
+    const [createInput, setCreateInput] = useState("");
+    const [editInput, setEditInput] = useState("");
 
     if (!board) {
         return null;
@@ -45,8 +47,17 @@ const BoardPage: React.FC = () => {
                 >
                     Create card
                 </button>
-                <MyModal isModal={editBoardModal} setModal={setEditBoardModal}>
-                    <BoardFormEdit setModal={setEditBoardModal} board={board} />
+                <MyModal
+                    isModal={editBoardModal}
+                    setModal={setEditBoardModal}
+                    setInput={setEditInput}
+                >
+                    <BoardFormEdit
+                        setModal={setEditBoardModal}
+                        board={board}
+                        input={editInput}
+                        setInput={setEditInput}
+                    />
                 </MyModal>
                 <MyModal
                     isModal={deleteBoardModal}
@@ -60,10 +71,13 @@ const BoardPage: React.FC = () => {
                 <MyModal
                     isModal={createCardModal}
                     setModal={setCreateCardModal}
+                    setInput={setCreateInput}
                 >
                     <BoardFormCreate
                         setModal={setCreateCardModal}
                         board={board}
+                        input={createInput}
+                        setInput={setCreateInput}
                     />
                 </MyModal>
             </div>

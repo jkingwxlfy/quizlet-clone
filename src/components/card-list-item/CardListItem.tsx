@@ -15,7 +15,7 @@ const CardListItem: React.FC<CardListItemProps> = ({ card, board }) => {
     }
 
     return (
-        <div className="card-list-item">
+        <Link className="card-list-item" to={`/boards/${board.id}/${card.id}`}>
             <div
                 className={`card-list-item__title ${
                     card.completed && card.completed ? "completed" : ""
@@ -23,13 +23,7 @@ const CardListItem: React.FC<CardListItemProps> = ({ card, board }) => {
             >
                 {title ? title : card.title}
             </div>
-            <Link
-                className="card-list-item__button"
-                to={`/boards/${board.id}/${card.id}`}
-            >
-                Open
-            </Link>
-        </div>
+        </Link>
     );
 };
 

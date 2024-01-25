@@ -4,10 +4,12 @@ import type { IBoard } from "../../models/IBoard";
 
 interface SliceState {
     boards: IBoard[];
+    inputFormError: boolean;
 }
 
 const initialState: SliceState = {
     boards: [],
+    inputFormError: false,
 };
 
 const boardsSlice = createSlice({
@@ -49,6 +51,9 @@ const boardsSlice = createSlice({
                 return itemBoard;
             });
         },
+        setInputFormError: (state, action: PayloadAction<boolean>) => {
+            state.inputFormError = action.payload;
+        },
     },
 });
 
@@ -60,5 +65,6 @@ export const {
     deleteOneBoard,
     createOneCard,
     setNewBoard,
+    setInputFormError,
 } = actions;
 export default reducer;

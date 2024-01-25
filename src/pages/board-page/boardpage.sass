@@ -2,8 +2,11 @@
     
 .board-page
     display: grid
-    grid-template-columns: 1fr
-    grid-template-rows: 100px 1fr 
+    grid-template-rows: 100px min-content
+    position: fixed
+    top: 0
+    right: 0
+    width: calc(100% - 480px)
     &__header
         display: flex
         justify-content: space-around

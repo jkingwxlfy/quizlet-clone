@@ -1,21 +1,24 @@
 @import "../../styles/mixins"
     
 .card-list-item
-    border: 1px solid #006880
+    border: 1px solid #ffffff
     border-radius: 12px
     width: 230px
-    height: fit-content
+    height: 100px
     padding: 25px
-    margin: 0 20px
+    text-decoration: none
+    transition: 0.3s all
+    scale: 1
+    color: #fff
+    display: flex
+    justify-content: center
+    align-items: center
+    &:hover
+        scale: 1.1
     &__title
         font-size: 22px
         text-align: center
         height: 30px
         margin-bottom: 10px
         &.completed
-            color: yellow
-    &__button
-        @include link-button
-        display: block
-        margin: 0 auto
-        text-align: center
+            color: #149eca

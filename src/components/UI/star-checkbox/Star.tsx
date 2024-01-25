@@ -16,6 +16,7 @@ const Star: React.FC<StarProps> = ({ id, checked }) => {
     const [editBoard] = useEditBoardMutation();
 
     const onSetStarred = (event: ChangeEvent<HTMLInputElement>) => {
+        event.stopPropagation();
         const starred = event.target.checked;
         const newCard = {
             ...card,

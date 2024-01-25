@@ -94,6 +94,7 @@ const TestModePage: React.FC = () => {
 
     useEffect(() => {
         return () => {
+            dispatch(setTestWords([]));
             dispatch(setIsShowedResults(false));
             dispatch(setFilledAnswerCount(0));
         };

@@ -82,10 +82,7 @@ const CardPage: React.FC = () => {
     return (
         <section className="card-page">
             <div className="card-page__header">
-                <button
-                    className="card-page__header__link"
-                    onClick={onClosePage}
-                >
+                <button className="card-mode-page__link" onClick={onClosePage}>
                     Back
                 </button>
                 <h1
