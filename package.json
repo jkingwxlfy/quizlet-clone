@@ -26,6 +26,7 @@
     },
     "scripts": {
         "start": "concurrently \"react-scripts start\" \"npx json-server database.json --port 3001\"",
+        "dev": "react-scripts start",
         "build": "react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject"

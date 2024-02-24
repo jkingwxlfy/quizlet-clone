@@ -3,28 +3,28 @@ import { Link } from "react-router-dom";
 
 import "./cardlistitem.sass";
 
-interface CardListItemProps {
-    card: ICard;
-    board: IBoard;
+interface ICardListItemProps {
+	card: ICard;
+	board: IBoard;
 }
 
-const CardListItem: React.FC<CardListItemProps> = ({ card, board }) => {
-    let title = "";
-    if (card.title.length > 10) {
-        title = card.title.slice(0, 10) + "...";
-    }
+const CardListItem: React.FC<ICardListItemProps> = ({ card, board }) => {
+	let title = "";
+	if (card.title.length > 10) {
+		title = card.title.slice(0, 10) + "...";
+	}
 
-    return (
-        <Link className="card-list-item" to={`/boards/${board.id}/${card.id}`}>
-            <div
-                className={`card-list-item__title ${
-                    card.completed && card.completed ? "completed" : ""
-                }`}
-            >
-                {title ? title : card.title}
-            </div>
-        </Link>
-    );
+	return (
+		<Link className="card-list-item" to={`/boards/${board.id}/${card.id}`}>
+			<div
+				className={`card-list-item__title ${
+					card.completed && card.completed ? "completed" : ""
+				}`}
+			>
+				{title ? title : card.title}
+			</div>
+		</Link>
+	);
 };
 
 export default CardListItem;
