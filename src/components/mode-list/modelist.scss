@@ -1,0 +1,33 @@
+.mode-list {
+    padding: 25px;
+    width: 100%;
+
+    &__container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__title {
+        padding-bottom: 10px;
+        text-align: center;
+    }
+
+    &__label {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+        margin-top: 15px;
+        padding-top: 15px;
+        width: fit-content;
+        font-size: 20px;
+        user-select: none;
+    }
+
+    &__checkbox {
+        width: 20px;
+        height: 30px;
+    }
+}

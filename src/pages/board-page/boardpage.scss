@@ -1,0 +1,27 @@
+@import '../../styles/mixins';
+
+.board-page {
+    display: grid;
+    position: fixed;
+    top: 0;
+    right: 0;
+    grid-template-rows: 100px min-content;
+    width: 70%;
+
+    &__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        padding: 0 100px;
+
+        &__title {
+            letter-spacing: 1.2px;
+            color: #149eca;
+            font-size: 32px;
+        }
+
+        &__button {
+            @include white-button;
+        }
+    }
+}

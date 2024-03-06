@@ -1,0 +1,19 @@
+@import '../../styles/mixins';
+
+.mode-list-item {
+    @include blue-button;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+    width: 120px;
+    height: 80px;
+    text-decoration: none;
+    font-size: 26px;
+
+    &.disabled {
+        user-select: none;
+        pointer-events: none;
+    }
+}

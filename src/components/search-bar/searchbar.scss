@@ -1,0 +1,22 @@
+@import '../../styles/mixins';
+
+.search-bar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0 25px;
+    width: 100%;
+    height: 150px;
+
+    &__input {
+        @include input;
+
+        height: 45px;
+    }
+
+    &__title {
+        padding: 10px 0;
+        font-size: 1.45rem;
+    }
+}

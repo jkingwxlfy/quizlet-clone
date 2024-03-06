@@ -1,0 +1,29 @@
+.my-modal {
+    display: flex;
+    position: fixed;
+    inset: 0;
+    align-items: center;
+    justify-content: center;
+    transition: 0.5s;
+    opacity: 0;
+    z-index: 9999;
+    background-color: rgba(0 0 0 / 60%);
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+
+    &.modal-active {
+        opacity: 1;
+        pointer-events: all;
+    }
+
+    &__content {
+        border: 0.6px solid #343b4f;
+        border-radius: 12px;
+        background-color: #080f25;
+        padding: 30px;
+        width: min-content;
+        min-width: 20%;
+        height: min-content;
+    }
+}

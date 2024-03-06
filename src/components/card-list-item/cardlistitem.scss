@@ -1,0 +1,32 @@
+@import '../../styles/mixins';
+
+.card-list-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s all;
+    border: 0.6px solid #343b4f;
+    border-radius: 12px;
+    background-color: #101935;
+    padding: 25px;
+    width: 230px;
+    height: 100px;
+    text-decoration: none;
+    scale: 1;
+    color: #fff;
+
+    &:hover {
+        scale: 1.1;
+    }
+
+    &__title {
+        margin-bottom: 10px;
+        height: 30px;
+        text-align: center;
+        font-size: 22px;
+    }
+
+    &.completed {
+        color: #b2ca14;
+    }
+}

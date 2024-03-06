@@ -1,0 +1,54 @@
+@import '../../styles/mixins';
+
+.word-list-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 25px;
+    border: 1px solid #006880;
+    border-radius: 12px;
+    padding: 25px;
+
+    &__words {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 80%;
+    }
+
+    &__word {
+        width: 410px;
+        height: fit-content;
+        text-align: center;
+        font-size: 22px;
+    }
+
+    &__buttons {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-left: 15px;
+        width: 20%;
+    }
+
+    &__button {
+        @include blue-button;
+    }
+
+    &__input {
+        outline: none;
+        border: 2px solid black;
+        border-radius: 12px;
+        padding: 5px 10px;
+        width: 100%;
+        font-size: 22px;
+
+        &:focus {
+            border: 3px solid #006880;
+        }
+    }
+}
+
+.hidden {
+    display: none;
+}

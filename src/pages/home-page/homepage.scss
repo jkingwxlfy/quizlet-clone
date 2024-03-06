@@ -1,0 +1,13 @@
+.home-page {
+    display: flex;
+    justify-content: center;
+    padding-top: 15%;
+    width: 70%;
+
+    &__title {
+        display: block;
+        margin: 0 auto;
+        text-align: center;
+        font-size: 32px;
+    }
+}

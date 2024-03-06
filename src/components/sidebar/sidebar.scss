@@ -1,0 +1,30 @@
+@import '../../styles/mixins';
+
+.board-menu {
+    border-right: 0.6px solid #343b4f;
+    background-color: #080f25;
+    padding: 15px 50px;
+    width: 30%;
+    height: fit-content;
+    min-height: 100vh;
+
+    &__container {
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+        align-items: center;
+        margin-bottom: 15px;
+        height: fit-content;
+    }
+
+    &__title {
+        padding-top: 20px;
+        font-size: 26px;
+    }
+
+    &__button {
+        @include blue-button;
+
+        margin: 20px 0;
+    }
+}

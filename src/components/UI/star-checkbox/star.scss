@@ -1,0 +1,28 @@
+/* stylelint-disable-next-line import-notation */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css');
+
+.star {
+    input {
+        appearance: none;
+
+        &:checked + span::before {
+            color: #ecf231;
+        }
+
+        &:hover + span::before {
+            color: #ecf231;
+        }
+    }
+
+    span {
+        /* stylelint-disable-next-line selector-pseudo-element-colon-notation */
+        &:before {
+            cursor: pointer;
+            color: #fff;
+            /* stylelint-disable-next-line font-family-no-missing-generic-family-keyword */
+            font-family: fontAwesome;
+            font-size: 2rem;
+            content: '\f005';
+        }
+    }
+}

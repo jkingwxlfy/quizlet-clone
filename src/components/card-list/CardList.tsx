@@ -1,20 +1,20 @@
-import CardListItem from "../card-list-item/CardListItem";
-import { IBoard } from "../../models/IBoard";
+import CardListItem from '../card-list-item/CardListItem';
+import type { IBoard } from '../../models/IBoard';
 
-import "./cardlist.sass";
+import './cardlist.scss';
 
 interface ICardListProps {
-	board: IBoard;
+    board: IBoard;
 }
 
 const CardList: React.FC<ICardListProps> = ({ board }) => {
-	return (
-		<div className="card-list">
-			{board.cards.map((card) => (
-				<CardListItem key={card.id} card={card} board={board} />
-			))}
-		</div>
-	);
+    return (
+        <div className="card-list">
+            {board.cards.map((card) => (
+                <CardListItem key={card.id} card={card} board={board} />
+            ))}
+        </div>
+    );
 };
 
 export default CardList;

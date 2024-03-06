@@ -1,0 +1,78 @@
+@import '../../styles/mixins';
+
+.card-mode-page {
+    &__header {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        font-size: 30px;
+    }
+
+    &__title {
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    &__star {
+        position: absolute;
+        top: 15px;
+        right: 20px;
+    }
+
+    &__link {
+        @include white-button;
+
+        position: absolute;
+        top: 10px;
+        left: 30px;
+        padding: 25px;
+        width: fit-content;
+        font-size: 36px;
+    }
+
+    &__card {
+        display: flex;
+        position: relative;
+        align-items: center;
+        justify-content: center;
+        border-radius: 12px;
+        background-color: #101935;
+        cursor: pointer;
+        padding: 0 150px;
+        height: 600px;
+        font-size: 36px;
+        user-select: none;
+    }
+
+    &__buttons {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        border-radius: 12px;
+        background-color: #101935;
+        padding: 0 250px;
+        height: 100px;
+    }
+
+    &__container {
+        margin-top: 30px;
+        border: 1px solid #2f94ac;
+        border-radius: 12px;
+    }
+
+    &__button {
+        @include blue-button;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 200px;
+        height: fit-content;
+        font-size: 28px;
+    }
+
+    &__word {
+        width: 100%;
+        text-align: center;
+    }
+}

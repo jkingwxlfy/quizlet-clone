@@ -1,0 +1,14 @@
+@import '../../styles/mixins';
+
+.board-form-delete {
+    &__buttons {
+        display: flex;
+        justify-content: space-around;
+        margin: 20px 0;
+        padding: 0 20px;
+    }
+
+    &__button {
+        @include blue-button;
+    }
+}

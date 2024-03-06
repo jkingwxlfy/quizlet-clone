@@ -1,0 +1,124 @@
+@import '../../styles/mixins';
+
+.test-mode-page {
+    &__container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-top: 130px;
+        margin-bottom: 50px;
+    }
+
+    &__header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 9999;
+        border-bottom: 3px solid #2f94ac;
+        background-color: #101935;
+        padding: 20px;
+        width: 100%;
+        font-size: 30px;
+    }
+
+    &__results {
+        display: none;
+        border: 3px solid #2f94ac;
+        border-radius: 12px;
+        padding: 25px;
+        width: 60%;
+        text-align: center;
+        line-height: 50px;
+        font-size: 24px;
+
+        &.showed {
+            display: block;
+        }
+    }
+
+    &__wrong {
+        margin-bottom: 15px;
+    }
+
+    &__retry {
+        @include blue-button;
+
+        display: block;
+        margin: 0 auto;
+        font-size: 24px;
+    }
+
+    &__answer {
+        display: none;
+        padding: 5px 0;
+        color: #5edc89;
+        font-size: 24px;
+
+        &.incorrect {
+            display: block;
+        }
+    }
+
+    &__item {
+        position: relative;
+        margin-top: 40px;
+        border: 3px solid #2f94ac;
+        border-radius: 12px;
+        padding: 15px;
+        width: 60%;
+        height: fit-content;
+        min-height: 170px;
+
+        &.correct {
+            border: 3px solid green;
+        }
+
+        &.incorrect {
+            border: 3px solid red;
+        }
+    }
+
+    &__count {
+        display: flex;
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__star {
+        order: 2;
+        margin-left: 10px;
+    }
+
+    &__value {
+        width: 90%;
+        height: fit-content;
+        font-size: 24px;
+    }
+
+    &__input {
+        @include input;
+
+        padding: 10px;
+        font-size: 24px;
+
+        &:focus {
+            border: 3px solid #ac632f;
+        }
+
+        &:disabled {
+            background-color: #fff;
+            color: #000;
+        }
+    }
+
+    &__submit {
+        @include blue-button;
+
+        display: block;
+        margin: 0 auto;
+    }
+}
