@@ -32,11 +32,11 @@ const Sidebar: React.FC = () => {
 
     return (
         <section className="app">
-            <section className="board-menu">
-                <div className="board-menu__container">
-                    <h1 className="board-menu__title">Boards</h1>
+            <section className="sidebar-menu">
+                <div className="sidebar-menu__container">
+                    <h1 className="sidebar-menu__title">Boards</h1>
                     <button
-                        className="board-menu__button"
+                        className="sidebar-menu__button"
                         onClick={() => setIsModal(true)}
                     >
                         Create board

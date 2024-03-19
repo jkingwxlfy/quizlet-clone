@@ -25,7 +25,7 @@ const BoardFormDelete: React.FC<IBoardFormDeleteProps> = ({
 
     return (
         <div className="board-form-delete">
-            <h1 className="board-menu-form__title">Are you sure?</h1>
+            <h1 className="sidebar-form__title">Are you sure?</h1>
             <div className="board-form-delete__buttons">
                 <button
                     className="board-form-delete__button"

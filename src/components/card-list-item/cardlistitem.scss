@@ -20,13 +20,12 @@
     }
 
     &__title {
-        margin-bottom: 10px;
         height: 30px;
         text-align: center;
         font-size: 22px;
-    }
 
-    &.completed {
-        color: #b2ca14;
+        &.completed {
+            color: #60ff53;
+        }
     }
 }

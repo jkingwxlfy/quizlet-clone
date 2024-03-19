@@ -2,7 +2,7 @@ import { useCreateBoardMutation } from '../../store/reducers/apiSlice';
 import { v4 as uuidv4 } from 'uuid';
 import { createOneBoard } from '../../store/reducers/boardsSlice';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { setInputFormError } from '../../store/reducers/boardsSlice';
+import { setInputFormMessage } from '../../store/reducers/boardsSlice';
 
 import './sidebarform.scss';
 
@@ -19,11 +19,11 @@ const SidebarForm: React.FC<ISidebarFormProps> = ({
 }) => {
     const [createBoard] = useCreateBoardMutation();
     const dispatch = useAppDispatch();
-    const { inputFormError } = useAppSelector((state) => state.boardsSlice);
+    const { inputFormMessage } = useAppSelector((state) => state.boardsSlice);
 
     const onCreateBoard = () => {
-        if (input.length > 35) {
-            dispatch(setInputFormError(true));
+        if (input.length > 35 || !input.length) {
+            dispatch(setInputFormMessage('Incorrect value'));
             return;
         }
         const newBoard = { id: uuidv4(), title: input, cards: [] };
@@ -34,19 +34,23 @@ const SidebarForm: React.FC<ISidebarFormProps> = ({
     };
 
     return (
-        <div className="board-menu-form">
-            <h1 className="board-menu-form__title">Enter a board name</h1>
+        <div className="sidebar-form">
+            <h1 className="sidebar-form__title">Enter a board name</h1>
             <input
-                className={`board-menu-form__input${
-                    inputFormError ? ' error' : ''
+                className={`sidebar-form__input${
+                    inputFormMessage ? ' error' : ''
                 }`}
                 placeholder="name"
                 type="text"
                 value={input}
                 onChange={(event) => setInput(event.target.value)}
             />
-            {inputFormError ? 'Max length 35' : ''}
-            <button className="board-menu-form__button" onClick={onCreateBoard}>
+            {inputFormMessage ? (
+                <div className="form-error">{inputFormMessage}</div>
+            ) : (
+                ''
+            )}
+            <button className="sidebar-form__button" onClick={onCreateBoard}>
                 Create
             </button>
         </div>

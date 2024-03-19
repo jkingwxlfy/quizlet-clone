@@ -1,4 +1,4 @@
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import './sidebaritem.scss';
 
@@ -9,19 +9,14 @@ interface ISidebarItemProps {
 
 const SidebarItem: React.FC<ISidebarItemProps> = ({ name, id }) => {
     return (
-        <Link className="board-menu-item" to={`/boards/${id}`}>
-            <div className="board-menu-item__name">{name}</div>
-            <NavLink
-                className={(navData) =>
-                    navData.isActive
-                        ? 'board-menu-item__button active'
-                        : 'board-menu-item__button'
-                }
-                to={`/boards/${id}`}
-            >
-                Open
-            </NavLink>
-        </Link>
+        <NavLink
+            className={(navData) =>
+                navData.isActive ? 'sidebar-item active' : 'sidebar-item'
+            }
+            to={`/boards/${id}`}
+        >
+            <div className="sidebar-item__name">{name}</div>
+        </NavLink>
     );
 };
 

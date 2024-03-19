@@ -1,6 +1,9 @@
 @import '../../styles/mixins';
 
-.board-menu-form {
+.sidebar-form {
+    display: grid;
+    gap: 25px;
+
     &__title {
         text-align: center;
         font-size: 20px;

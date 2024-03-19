@@ -1,19 +1,26 @@
 @import '../../styles/mixins';
 
-.board-menu-item {
+.sidebar-item {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    transition: 0.8s all;
-    margin-top: 5px;
+    justify-content: center;
+    transition: 0.3s all;
+    border: 0.2px solid transparent;
+    border-radius: 12px;
+    padding: 0 15px;
     width: 100%;
     text-decoration: none;
     color: #fff;
 
     &:hover {
-        a {
-            color: #149eca;
-        }
+        border: 0.2px solid #fff7;
+        border-radius: 12px;
+        color: #149eca;
+    }
+
+    &.active {
+        border: 0.2px solid #fff7;
+        border-radius: 12px;
     }
 
     &__name {

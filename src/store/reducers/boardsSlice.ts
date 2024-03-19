@@ -1,19 +1,20 @@
-import { createSlice } from "@reduxjs/toolkit";
-import type { PayloadAction } from "@reduxjs/toolkit";
-import type { IBoard } from "../../models/IBoard";
+/* eslint-disable no-return-assign */
+import { createSlice } from '@reduxjs/toolkit';
+import type { PayloadAction } from '@reduxjs/toolkit';
+import type { IBoard } from '../../models/IBoard';
 
 interface SliceState {
     boards: IBoard[];
-    inputFormError: boolean;
+    inputFormMessage: string;
 }
 
 const initialState: SliceState = {
     boards: [],
-    inputFormError: false,
+    inputFormMessage: '',
 };
 
 const boardsSlice = createSlice({
-    name: "boards",
+    name: 'boards',
     initialState,
     reducers: {
         setAllBoards: (state, action: PayloadAction<IBoard[]>) => {
@@ -51,8 +52,8 @@ const boardsSlice = createSlice({
                 return itemBoard;
             });
         },
-        setInputFormError: (state, action: PayloadAction<boolean>) => {
-            state.inputFormError = action.payload;
+        setInputFormMessage: (state, action: PayloadAction<string>) => {
+            state.inputFormMessage = action.payload;
         },
     },
 });
@@ -65,6 +66,6 @@ export const {
     deleteOneBoard,
     createOneCard,
     setNewBoard,
-    setInputFormError,
+    setInputFormMessage,
 } = actions;
 export default reducer;

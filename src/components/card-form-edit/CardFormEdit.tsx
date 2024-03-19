@@ -31,16 +31,16 @@ const CardFormEdit: React.FC<ICardFormEditProps> = ({ setModal }) => {
     };
 
     return (
-        <div className="board-menu-form">
-            <h1 className="board-menu-form__title">Enter a new name</h1>
+        <div className="sidebar-form">
+            <h1 className="sidebar-form__title">Enter a new name</h1>
             <input
-                className="board-menu-form__input"
+                className="sidebar-form__input"
                 type="text"
                 placeholder="new name"
                 onChange={(event) => setInput(event.target.value)}
                 value={input}
             />
-            <button className="board-menu-form__button" onClick={changeName}>
+            <button className="sidebar-form__button" onClick={changeName}>
                 Confirm
             </button>
         </div>

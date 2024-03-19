@@ -1,5 +1,6 @@
+import { useEffect } from 'react';
 import { useAppDispatch } from '../../../hooks/redux';
-import { setInputFormError } from '../../../store/reducers/boardsSlice';
+import { setInputFormMessage } from '../../../store/reducers/boardsSlice';
 
 import './mymodal.scss';
 
@@ -20,14 +21,20 @@ const MyModal: React.FC<IMyModalProps> = ({
 
     const onCloseModal = () => {
         setModal(false);
-        setInput && setInput('');
-        dispatch(setInputFormError(false));
     };
 
     const clazzWrapper = isModal ? 'my-modal modal-active' : 'my-modal';
     const clazzContent = isModal
         ? 'my-modal__content modal-active'
         : 'my-modal__content';
+
+    useEffect(() => {
+        if (isModal) {
+            setInput!('');
+            dispatch(setInputFormMessage(''));
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isModal]);
 
     return (
         <main className={clazzWrapper} onClick={onCloseModal}>

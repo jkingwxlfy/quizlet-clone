@@ -1,0 +1,95 @@
+@mixin blue-button {
+    user-select: none;
+    transition: 0.1s all;
+    outline: none;
+    border: 1px solid black;
+    border-radius: 12px;
+    background: #6c72ff;
+    cursor: pointer;
+    padding: 10px;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 600;
+
+    &:hover {
+        background: #2d2f6a;
+    }
+
+    &:active {
+        transform: translate(0, 0.5em);
+    }
+
+    &.disabled {
+        background: #0a4e64;
+        color: #a0a0a0;
+
+        &:active {
+            transform: translate(0, 0);
+        }
+    }
+}
+
+@mixin white-button {
+    transition: 0.1s all;
+    outline: 0;
+    border: 0;
+    border-radius: 9999px;
+    background-color: transparent;
+    cursor: pointer;
+    padding: 10px;
+    text-decoration: none;
+    color: #fff;
+    font-size: 20px;
+    user-select: none;
+
+    &:hover {
+        background-color: #101935;
+    }
+
+    &:active {
+        transform: translate(0, 0.5em);
+    }
+
+    &.active {
+        color: #149eca;
+    }
+}
+
+@mixin link-button {
+    transition: 0.1s all;
+    outline: 0;
+    border: 0;
+    background-color: transparent;
+    cursor: pointer;
+    padding: 10px;
+    text-decoration: none;
+    color: #fff;
+    font-size: 20px;
+    user-select: none;
+
+    &:hover {
+        color: #149eca;
+    }
+
+    &:active {
+        transform: translate(0, 0.5em);
+    }
+
+    &.active {
+        color: #149eca;
+    }
+}
+
+@mixin input {
+    display: block;
+    outline: none;
+    border: 1px solid black;
+    border-radius: 12px;
+    padding: 5px 10px;
+    width: 100%;
+    font-size: 20px;
+
+    &:focus {
+        border: 3px solid #398fac;
+    }
+}
