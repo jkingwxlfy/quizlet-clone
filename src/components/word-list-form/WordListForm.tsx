@@ -16,29 +16,42 @@ const WordListForm: React.FC = () => {
     const [editBoard] = useEditBoardMutation();
     const dispatch = useAppDispatch();
 
+    const onHandleEnter = (keyPress: React.KeyboardEvent<HTMLDivElement>) => {
+        if (keyPress.key === 'Enter') {
+            onAddWord();
+        }
+    };
+
     const onAddWord = () => {
-        const word: IWord = {
-            word: expression,
-            value: definition,
-            starred: false,
-            id: uuidv4(),
-        };
-        const newCards = board.cards.map((itemCard: ICard) => {
-            if (itemCard.id === card.id) {
-                return { ...itemCard, words: [word, ...itemCard.words] };
-            } else {
-                return itemCard;
-            }
-        });
-        editBoard({ ...board, cards: newCards });
-        dispatch(editCardData({ ...card, words: [word, ...card.words] }));
-        dispatch(setSearchQuery(searchQuery));
-        setExpression('');
-        setDefinition('');
+        if (expression.length || definition.length) {
+            const word: IWord = {
+                word: expression,
+                value: definition,
+                starred: false,
+                id: uuidv4(),
+            };
+
+            const newCards = board.cards.map((itemCard: ICard) => {
+                if (itemCard.id === card.id) {
+                    return { ...itemCard, words: [word, ...itemCard.words] };
+                } else {
+                    return itemCard;
+                }
+            });
+
+            editBoard({ ...board, cards: newCards });
+            dispatch(editCardData({ ...card, words: [word, ...card.words] }));
+            dispatch(setSearchQuery(searchQuery));
+            setExpression('');
+            setDefinition('');
+        }
     };
 
     return (
-        <div className="word-list-form">
+        <div
+            className="word-list-form"
+            onKeyDown={(keyPress) => onHandleEnter(keyPress)}
+        >
             <div className="word-list-form__container">
                 <input
                     className="word-list-form__input"

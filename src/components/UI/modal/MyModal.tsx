@@ -29,8 +29,8 @@ const MyModal: React.FC<IMyModalProps> = ({
         : 'my-modal__content';
 
     useEffect(() => {
-        if (isModal) {
-            setInput!('');
+        if (isModal && setInput) {
+            setInput('');
             dispatch(setInputFormMessage(''));
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
